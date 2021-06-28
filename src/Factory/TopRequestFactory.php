@@ -8,6 +8,7 @@
  */
 namespace RetailCrm\Factory;
 
+use Exception;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -23,7 +24,6 @@ use RetailCrm\Interfaces\RequestTimestampProviderInterface;
 use RetailCrm\Interfaces\TopRequestFactoryInterface;
 use RetailCrm\Model\Request\BaseRequest;
 use RetailCrm\Service\RequestDataFilter;
-use RetailCrm\Service\TopRequestProcessor;
 use UnexpectedValueException;
 
 /**
@@ -192,7 +192,7 @@ class TopRequestFactory implements TopRequestFactoryInterface
                     $this->uriFactory->createUri($appData->getServiceUrl())
                 )->withBody($this->streamFactory->createStream($postData))
                 ->withHeader('content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new FactoryException(
                 sprintf('Error building request: %s', $exception->getMessage()),
                 0,
@@ -270,10 +270,10 @@ class TopRequestFactory implements TopRequestFactoryInterface
         $type = gettype($value);
 
         switch ($type) {
-            case 'resource':
             case 'NULL':
                 return $value;
             case 'boolean':
+                return $value ? 'true' : 'false';
             case 'integer':
             case 'double':
             case 'string':

@@ -8,7 +8,6 @@
  */
 namespace RetailCrm\Tests\Factory;
 
-use RetailCrm\Component\Constants;
 use RetailCrm\Factory\TopRequestFactory;
 use RetailCrm\Interfaces\TopRequestFactoryInterface;
 use RetailCrm\Model\Enum\AvailableSignMethods;
@@ -32,7 +31,7 @@ class TopRequestFactoryTest extends TestCase
         );
         $uri = $request->getUri();
         $contents = self::getStreamData($request->getBody());
-
+file_put_contents("./aaa.dump", var_export($contents, true));
         self::assertNotEmpty($contents);
         self::assertFalse(stripos($contents, 'simplify'), $uri->getQuery());
         self::assertNotFalse(stripos($contents, 'SPAIN_LOCAL_CORREOS'));

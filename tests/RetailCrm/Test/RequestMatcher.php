@@ -238,6 +238,9 @@ class RequestMatcher implements RequestMatcherInterface
      */
     private function firstArrayPresentInSecond(array $first, array $second): bool
     {
+        array_walk($first, function(&$a) { $a = is_bool($a) ? $a ? 'true' : 'false' : $a; });
+        array_walk($second, function(&$a) { $a = is_bool($a) ? $a ? 'true' : 'false' : $a; });
+
         return count(array_diff_assoc($first, array_intersect_assoc($first, $second))) === 0;
     }
 

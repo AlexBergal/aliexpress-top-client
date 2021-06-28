@@ -10,7 +10,6 @@ namespace RetailCrm\Tests\TopClient;
 
 use DateTime;
 use Http\Message\RequestMatcher\CallbackRequestMatcher;
-use Psr\Http\Message\RequestInterface;
 use RetailCrm\Builder\TopClientBuilder;
 use RetailCrm\Model\Entity\CategoryInfo;
 use RetailCrm\Model\Enum\DropshippingAreas;
@@ -73,7 +72,7 @@ class ClientTest extends TestCase
         $errorResponse->errorResponse = $errorBody;
 
         $mockClient = self::getMockClient();
-        $mockClient->on(new CallbackRequestMatcher(function (RequestInterface $request) {
+        $mockClient->on(new CallbackRequestMatcher(function () {
             return true;
         }), $this->responseJson(400, $errorResponse));
 
@@ -141,7 +140,7 @@ EOF;
                     'app_key' => self::getEnvAppKey(),
                     'method' => 'aliexpress.solution.seller.category.tree.query',
                     'category_id' => '5090300',
-                    'filter_no_permission' => 1,
+                    'filter_no_permission' => true,
                     'session' => self::getEnvToken()
                 ]),
             $this->responseJson(200, $json)
