@@ -77,7 +77,7 @@ class AEOPAttributeDto
      * @JMS\SerializedName("values")
      * @JMS\Accessor(setter="setValues")
      */
-    private array $values;
+    private array $values = [];
 
     public function getFeatures(): array
     {
@@ -90,7 +90,7 @@ class AEOPAttributeDto
 
     public function setValues(array $values): void
     {
-        $values = $values['aeop_attr_value_dto'];
+        $values = $values['aeop_attr_value_dto'] ?? [];
         array_walk($values, function (&$row) {
             $row['names'] = json_decode($row['names'], true);
             if (!empty($row['value_tags'])) {
@@ -98,5 +98,10 @@ class AEOPAttributeDto
             }
         });
         $this->values = $values;
+    }
+
+    public function getValues(): array
+    {
+        return $this->values;
     }
 }
