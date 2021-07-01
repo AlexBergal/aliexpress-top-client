@@ -23,7 +23,7 @@ class ResponseDataResult
      */
     public function getAttributes(): ?array
     {
-        return $this->attributes ? $this->attributes->AEOPAttributeDtos : null;
+        return $this->attributes ? $this->attributes->AEOPAttributeDtos : [];
     }
 
     public function isSuccess(): bool

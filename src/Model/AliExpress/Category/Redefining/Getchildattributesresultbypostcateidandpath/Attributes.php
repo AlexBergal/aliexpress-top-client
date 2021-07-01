@@ -12,5 +12,5 @@ class Attributes
      * @JMS\Type("array<RetailCrm\Model\AliExpress\Category\Redefining\Getchildattributesresultbypostcateidandpath\AEOPAttributeDto>")
      * @JMS\SerializedName("aeop_attribute_dto")
      */
-    public array $AEOPAttributeDtos;
+    public array $AEOPAttributeDtos = [];
 }
