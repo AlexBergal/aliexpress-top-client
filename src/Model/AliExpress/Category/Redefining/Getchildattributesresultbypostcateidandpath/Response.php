@@ -12,4 +12,9 @@ class Response extends BaseResponse
      * @JMS\SerializedName("aliexpress_category_redefining_getchildattributesresultbypostcateidandpath_response")
      */
     public ResponseData $responseData;
+
+    public function isSuccess(): bool
+    {
+        return $this->responseData->result->isSuccess();
+    }
 }

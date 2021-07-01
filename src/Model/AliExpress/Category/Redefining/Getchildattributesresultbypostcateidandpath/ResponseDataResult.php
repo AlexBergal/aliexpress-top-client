@@ -10,7 +10,7 @@ class ResponseDataResult
      * @JMS\Type(Attributes::class)
      * @JMS\SerializedName("attributes")
      */
-    private Attributes $attributes;
+    private ?Attributes $attributes = null;
 
     /**
      * @JMS\Type("bool")
@@ -21,9 +21,9 @@ class ResponseDataResult
     /**
      * @return AEOPAttributeDto[]
      */
-    public function getAttributes(): array
+    public function getAttributes(): ?array
     {
-        return $this->attributes->AEOPAttributeDtos;
+        return $this->attributes ? $this->attributes->AEOPAttributeDtos : null;
     }
 
     public function isSuccess(): bool
